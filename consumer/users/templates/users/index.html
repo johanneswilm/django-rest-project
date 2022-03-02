@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <h1>The users</h1>
+    {% for user in users.results %}
+      <p>
+        <b>Username: </b> {{user.username}}<br>
+        <b>Email: </b> {{user.email}}<br>
+        <b>URL: </b> {{user.url}}
+      </p>
+    {% endfor %}
+  </body>
+</html>
