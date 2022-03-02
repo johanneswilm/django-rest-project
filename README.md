@@ -6,7 +6,7 @@ To run it:
 
 1. Install the requirements.
 
-2. Create one or multiple superusers in the provider app:
+2. Create one or multiple superusers in the provider app. One of these users needs to be called "admin" and have the password "password":
 
 ```
 cd provider
@@ -41,3 +41,5 @@ cd consumer
 1. Expand the consumer project. Create views for individual users and create links to them from the overview/index page.
 
 2. Expand the provider project. Create your own models and serializers. Then make them available through the consumer project.
+
+3. Add an interface and methods to modify fields on an existing model instance, create new model instances or delete existing ones.
