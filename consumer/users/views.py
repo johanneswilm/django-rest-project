@@ -1,7 +1,13 @@
 import httpx
+from asgiref.sync import sync_to_async
 
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.models import User
+
+
+def get_local_users():
+    return list(User.objects.all())
 
 
 async def index(request):
@@ -9,5 +15,11 @@ async def index(request):
         response = await client.get(
             "http://localhost:8000/users/users/", auth=("admin", "password")
         )
-    users = response.json()
-    return render(request, "users/index.html", {"users": users})
+    json = response.json()
+    remote_users = json["results"]
+    local_users = await sync_to_async(get_local_users, thread_sensitive=True)()
+    return render(
+        request,
+        "users/index.html",
+        {"remote_users": remote_users, "local_users": local_users},
+    )

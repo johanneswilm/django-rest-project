@@ -29,7 +29,8 @@ This will run the django provider project on port 8000. It includes the Django R
 ```
 cd consumer
 ./manage.py migrate
-./manage runserver
+./manage.py createsuperuser
+./manage.py runserver
 ```
 
 6. Take a look at the output of the consumer app in a browser at http://localhost:7000/users/
