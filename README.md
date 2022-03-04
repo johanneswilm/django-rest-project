@@ -29,7 +29,7 @@ This will run the django provider project on port 8000. It includes the Django R
 ```
 cd consumer
 ./manage.py migrate
-./manage.py createsuperuser
+./manage.py createsuperuser # Create at least one user
 ./manage.py runserver
 ```
 
