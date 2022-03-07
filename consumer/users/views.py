@@ -12,16 +12,22 @@ def get_local_users():
 
 
 async def index(request):
-    async with httpx.AsyncClient() as client:
-        response = await client.get(
-            "http://localhost:8000/users/users/",
-            headers={"Authorization": f"Token {settings.AUTH_TOKEN}"},
-        )
-    json = response.json()
-    remote_users = json["results"]
-    local_users = await sync_to_async(get_local_users, thread_sensitive=True)()
+    context = {}
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.get(
+                "http://localhost:8000/users/users/",
+                headers={"Authorization": f"Token {settings.AUTH_TOKEN}"},
+            )
+        json = response.json()
+        context["remote_users"] = json["results"]
+    except httpx.RequestError as exc:
+        context["connection_error"] = True
+    context["local_users"] = await sync_to_async(
+        get_local_users, thread_sensitive=True
+    )()
     return render(
         request,
         "users/index.html",
-        {"remote_users": remote_users, "local_users": local_users},
+        context,
     )
