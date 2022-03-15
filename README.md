@@ -2,7 +2,18 @@
 
 This is an example to show how the Django Rest Framework and asyncrhonous views work.
 
+** Setup redis **
+Install the redis server:
+    MAC: brew install redis
+    Ubuntu: apt install redis-server
+```
+pip install redis
+```
+
+** Install app
+
 To run it:
+
 
 1. Install the requirements.
 
@@ -44,6 +55,7 @@ cp local_settings.py.default local_settings.py
 ```
 
 7. Take a look at the output of the consumer project in a browser at http://localhost:7000/users/
+
 
 =====
 
